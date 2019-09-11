@@ -1,4 +1,4 @@
-# evoke 2019 Results demo
+# Evoke 2019 Results demo
 
 Includes:
 - ANSI / ASCII PC
@@ -16,28 +16,15 @@ Since there is no Renoise js playback routine available i decided to use an expo
 
 Show grafix while playing audio :)
 
-~~Learn or do somthing new (at least for me: PWA(on-/offline detection and local data storage) )
-or i just start with webworkers first
-or with type="module"..~~
-
 Reuse something old (lds.js + jsgoniometer)
 
-~~Use friends work (webMPT with generic audio processor with Jürgen Wothke). I wait till his ~~
-~~Use friends work (OpenMPT (libopenmpt+chiptune2))~~
-~~Cowbell ??~~
+Use open work (webMPT with generic audio processor with Jürgen Wothke)
+
+~~Cowbell ?? (no active dev, but works like a charm)~~
 
 Ammigaaaaaaaaaaaaaaaaa (style)
 
-### Progress
-
-Day 1: gathered all data, play using Wothke audio processor 0.1
-Day 2: make amiga style with windows on a workbench. i'm not a designer 0.2
-Day 3: wife
-Day 4: work, still found time to play a bit with workers, ES6 modules, constructor
-Day 5: windows and screens are moveable 0.3
-Day5b: use SnuPlayer as constructor and finally use latest libopenmpt (based on chiptune2)
-
-ToDo:
+### ToDo:
 - AUDIO
   - make use of webworkers for audio playback => workers got no direct audioCtx
   - want to switch to latest libopenmpt version => last checked i still found js version best

@@ -14,28 +14,42 @@ var demoparty = (function (){
   var currentTrack = -1;
   var currentPic = -1;
   var currentTxt = -1;
+  var CDNs = { // this and other function like addScript should be moved into utils object
+    'enable': true,                    // use CDNs
+    'enableCOM': true,                 // shall we use CDNs for COM, false = locale/home hosted
+    'useMIN': false,                    // use minimized .js resources
+    'global': '//cdn.jsdelivr.net/gh/', // global CDN provider used
+    'home': 'DrSnuggles/Evoke19/',      // home of this repo
+  };
 
+  //
+  // set browser behaviour
+  //
   document.oncontextmenu = function(){return false;};
 
   //
   // load libs
   //
-  loadScript('js/ldr.js', function() {
+  loadScript(CDN('com/DrSnuggles/Decruncher@ldr/ldr.js'), function() {
     applyStyle('amiga', function() {
-      LDR.loadURL('js/goniometer.js', function(dat) {
+      LDR.loadURL(CDN('com/DrSnuggles/jsGoniometer/goniometer.js'), function(dat) {
         addHead('script', dat);
+        // set this colors, would be nicer/more general to use style information here
+        Goniometer.bgColor = [];
+        Goniometer.bgLineColor = [0, 0, 34, 0.5];
+        Goniometer.scopeColor = [255, 136, 0, 1];
 
-        LDR.loadURL('com/scriptprocessor_player.js', function(dat) {
+        LDR.loadURL(CDN('com/wothke/webaudio-player/scriptprocessor_player.js'), function(dat) {
           addHead('script', dat);
 
-          LDR.loadURL('com/backend_mpt.js', function(dat) {
+          LDR.loadURL(CDN('com/wothke/webMPT/emscripten/htdocs/backend_mpt.js'), function(dat) {
             addHead('script', dat);
 
             LDR.loadURL('data/data.json', function(dat) {
               data = JSON.parse(dat);
               playNextTrack();
 
-              LDR.loadURL('com/ansilove.js', function(dat) {
+              LDR.loadURL(CDN('com/ansilove/ansilove.js/ansilove.js'), function(dat) {
                 addHead('script', dat);
 
                 // show results
@@ -188,6 +202,20 @@ var demoparty = (function (){
   //
   // private helper functions
   //
+  function CDN(s) {
+    var ret = s;
+    if (CDNs.enable) {
+      ret = CDNs.global;
+
+      if (s.indexOf("com/") !== -1 && s.indexOf("com/DrSnuggles/") === -1 && CDNs.enableCOM) {
+        ret += s.substr(4);
+      } else {
+        ret += CDNs.home + s;
+      }
+
+    }
+    return ret;
+  }
   function loadScript(src, cb) { // loadScript (often one of my first functions i call)
     var script = document.createElement("script");
     script.onload = function() {
