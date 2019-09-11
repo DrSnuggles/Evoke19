@@ -18,7 +18,7 @@ Show grafix while playing audio :)
 
 Reuse something old (lds.js + jsgoniometer)
 
-Use open work (webMPT with generic audio processor with Jürgen Wothke)
+Use open work (webMPT with generic audio processor by Jürgen Wothke)
 
 ~~Cowbell ?? (no active dev, but works like a charm)~~
 

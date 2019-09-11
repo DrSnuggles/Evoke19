@@ -15,7 +15,7 @@ OS 2.x
 /* Typography */
 @font-face {
   font-family: Topaz;
-  src: url("style/amiga/topazplus120010.woff2") format("woff2");
+  src: url("//cdn.jsdelivr.net/gh/DrSnuggles/Evoke19/style/amiga/topazplus120010.woff2") format("woff2"); /* no CDN loading here, maybe move to own Style/Layout function */
 }
 * {
   font-family: Topaz;
@@ -26,7 +26,7 @@ OS 2.x
 *,
 .dragging
 {
-  cursor: url("style/amiga/pointer1.cur"), auto;
+  cursor: url("//cdn.jsdelivr.net/gh/DrSnuggles/Evoke19/style/amiga/pointer1.cur"), auto; /* no CDN loading here, maybe move to own Style/Layout function */
 }
 
 /* Layout */

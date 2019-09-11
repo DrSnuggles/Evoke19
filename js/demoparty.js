@@ -16,7 +16,7 @@ var demoparty = (function (){
   var currentTxt = -1;
   var CDNs = { // this and other function like addScript should be moved into utils object
     'enable': true,                    // use CDNs
-    'enableCOM': true,                 // shall we use CDNs for COM, false = locale/home hosted
+    'enableCOM': false,                 // shall we use CDNs for COM, false = locale/home hosted
     'useMIN': false,                    // use minimized .js resources
     'global': '//cdn.jsdelivr.net/gh/', // global CDN provider used
     'home': 'DrSnuggles/Evoke19/',      // home of this repo
@@ -45,7 +45,7 @@ var demoparty = (function (){
           LDR.loadURL(CDN('com/wothke/webMPT/emscripten/htdocs/backend_mpt.js'), function(dat) {
             addHead('script', dat);
 
-            LDR.loadURL('data/data.json', function(dat) {
+            LDR.loadURL(CDN('data/data.json'), function(dat) {
               data = JSON.parse(dat);
               playNextTrack();
 
@@ -53,7 +53,7 @@ var demoparty = (function (){
                 addHead('script', dat);
 
                 // show results
-                LDR.loadURL('data/results.txt', function(dat) {
+                LDR.loadURL(CDN('data/results.txt'), function(dat) {
                   resultsbox.innerText = dat;
                   showNextPic();
                   showNextTxt();
@@ -96,6 +96,7 @@ var demoparty = (function (){
     //title.innerText = song.substr(song.lastIndexOf("/")+1);
     // mp3/ogg || tracker
     var ext = getExt(song);
+    song = CDN(song);
     if (ext === "mp3" || ext === "ogg" || ext === "aac" || ext === "wav" || ext === "flac") {
       audio = new Audio(song);
       audio.play();
@@ -118,7 +119,7 @@ var demoparty = (function (){
     } else {
       fn = 'pixel/'+data.v.pixel[currentPic-data.v.freestyle.length];
     }
-    picture.src = 'data/v/'+ fn;
+    picture.src = CDN('data/v/'+ fn);
     picName.innerText = fn;
   }
   function showNextTxt(i) {
@@ -134,7 +135,7 @@ var demoparty = (function (){
     }
     txtTitle.innerText = fn;
     textbox.innerText = '';
-    fn = 'data/v/ansi_' +fn;
+    fn = CDN('data/v/ansi_' +fn);
     if (getExt(fn) !== "ans") {
       // ASCII / TXT
       LDR.loadURL(fn, function(dat) {
@@ -234,9 +235,9 @@ var demoparty = (function (){
   }
   function applyStyle(style, cb) {
     // load CSS
-    LDR.loadURL('style/'+ style +'/style.css', function(dat) {
+    LDR.loadURL(CDN('style/'+ style +'/style.css'), function(dat) {
       addHead('style', dat, function() {
-        LDR.loadURL('style/'+ style +'/layout.html', function(dat) {
+        LDR.loadURL(CDN('style/'+ style +'/layout.html'), function(dat) {
           document.body.innerHTML += dat;
 
           // keyboard handler
